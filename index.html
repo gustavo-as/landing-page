@@ -1,137 +1,1332 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Gustavo Asimoes — Full Stack Developer</title>
-  <link rel="stylesheet" href="style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Java Developer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg: #F4F7FB;
+  --surface: #FFFFFF;
+  --surface2: #EBF1F9;
+  --border: rgba(30,64,120,0.1);
+  --border-md: rgba(30,64,120,0.18);
+  --text: #0F1C33;
+  --text-muted: #4A5F7A;
+  --text-dim: #9AAEC4;
+  --blue: #1B4FD8;
+  --blue-dark: #0F3399;
+  --blue-light: #EBF0FD;
+  --blue-mid: #D0DDF9;
+  --accent: #1B4FD8;
+  --accent-dim: rgba(27,79,216,0.08);
+  --green: #0D7A55;
+  --green-bg: #E6F5EF;
+  --amber: #A05C00;
+  --amber-bg: #FFF3E0;
+  --java: #1565C0;
+  --java-light: #E3712A;
+  --spring: #2E7D32;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Syne', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--blue-mid); border-radius: 2px; }
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 200;
+  height: 60px;
+  padding: 0 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  background: rgba(255,255,255,0.94);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(14px);
+}
+
+.nav-logo {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  font-weight: 400;
+  color: var(--blue);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+
+.nav-links a {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover { color: var(--blue); }
+
+.nav-right { display: flex; align-items: center; gap: 1rem; flex-shrink: 0; }
+
+/* LANG SWITCHER */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  background: var(--surface2);
+  border: 1px solid var(--border-md);
+  border-radius: 4px;
+  padding: 3px;
+}
+
+.lang-btn {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: var(--text-dim);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.28rem 0.6rem;
+  border-radius: 3px;
+  transition: all 0.18s;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.lang-btn:hover { color: var(--text-muted); background: var(--surface); }
+
+.lang-btn.active {
+  background: var(--blue);
+  color: #fff;
+}
+
+.lang-flag { font-size: 12px; line-height: 1; }
+
+.nav-cta {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--blue);
+  text-decoration: none;
+  border: 1px solid rgba(27,79,216,0.35);
+  background: var(--blue-light);
+  padding: 0.42rem 1rem;
+  border-radius: 3px;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.nav-cta:hover { background: var(--blue); color: #fff; border-color: var(--blue); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 4rem;
+  position: relative;
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 55% 65% at 85% 35%, rgba(27,79,216,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 40% 40% at 10% 75%, rgba(27,79,216,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(27,79,216,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(27,79,216,0.05) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 85% 80% at 60% 40%, black 0%, transparent 100%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+  padding-top: 5rem;
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: 4rem;
+  align-items: center;
+}
+
+.hero-left {}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--java);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  padding: 0.4rem 0.9rem;
+  border: 1px solid rgba(21,101,192,0.25);
+  border-radius: 3px;
+  background: rgba(21,101,192,0.06);
+  animation: fadeUp 0.7s ease both;
+}
+
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--java);
+  animation: pulse 2s ease infinite;
+}
+
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.35} }
+@keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+.hero h1 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(2.8rem, 5.5vw, 5rem);
+  line-height: 1.05;
+  letter-spacing: -0.025em;
+  color: var(--text);
+  margin-bottom: 1.5rem;
+  animation: fadeUp 0.7s 0.1s ease both;
+}
+
+.hero h1 .accent { color: var(--blue); font-style: italic; }
+
+.hero-sub {
+  font-size: 16px;
+  color: var(--text-muted);
+  max-width: 480px;
+  line-height: 1.75;
+  margin-bottom: 2.5rem;
+  font-weight: 400;
+  animation: fadeUp 0.7s 0.2s ease both;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  animation: fadeUp 0.7s 0.3s ease both;
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: var(--blue);
+  color: #fff;
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 2px 12px rgba(27,79,216,0.22);
+}
+
+.btn-primary:hover { background: var(--blue-dark); transform: translateY(-1px); box-shadow: 0 4px 20px rgba(27,79,216,0.3); }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: transparent; color: var(--text-muted); font-size: 13px; font-weight: 500;
+  padding: 0.75rem 1.4rem; border: 1px solid var(--border-md); border-radius: 4px;
+  text-decoration: none; cursor: pointer; transition: all 0.2s;
+}
+
+.btn-ghost:hover { color: var(--blue); border-color: var(--blue); background: var(--blue-light); }
+
+/* HERO RIGHT — stats card */
+.hero-card {
+  background: var(--surface);
+  border: 1px solid var(--border-md);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 32px rgba(27,79,216,0.07);
+  animation: fadeUp 0.7s 0.35s ease both;
+}
+
+.hero-card-title {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--text-dim);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+
+.stat-row {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.stat-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.stat-label-s {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.stat-num-s {
+  font-family: 'Instrument Serif', serif;
+  font-size: 1.6rem;
+  color: var(--blue);
+  line-height: 1;
+}
+
+.stat-divider { height: 1px; background: var(--border); }
+
+.hero-tech-row {
+  margin-top: 1.5rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--border);
+}
+
+.hero-tech-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--text-dim);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.7rem;
+}
+
+.tech-pills { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+.tech-pill {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--java);
+  background: var(--blue-light);
+  border: 1px solid rgba(27,79,216,0.15);
+  padding: 0.22rem 0.6rem;
+  border-radius: 3px;
+  letter-spacing: 0.04em;
+}
+
+/* ── SECTIONS ── */
+.section { padding: 7rem 4rem; max-width: 1100px; margin: 0 auto; }
+
+.section-label { display: flex; align-items: center; gap: 1rem; margin-bottom: 3.5rem; }
+
+.section-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  font-weight: 300;
+  color: var(--blue);
+  letter-spacing: 0.15em;
+  white-space: nowrap;
+}
+
+.section-line { flex: 1; height: 1px; background: var(--border-md); }
+
+.section-title {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  letter-spacing: -0.015em;
+  color: var(--text);
+  margin-bottom: 0.75rem;
+}
+
+.section-sub {
+  font-size: 15px;
+  color: var(--text-muted);
+  max-width: 500px;
+  line-height: 1.75;
+  margin-bottom: 3rem;
+}
+
+/* ── SKILLS ── */
+.skills-section {
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.skills-wrap { max-width: 1100px; margin: 0 auto; padding: 4.5rem 4rem; }
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--border-md);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.skill-cell {
+  background: var(--surface);
+  padding: 1.75rem;
+  border-right: 1px solid var(--border);
+  transition: background 0.2s;
+}
+
+.skill-cell:last-child { border-right: none; }
+.skill-cell:hover { background: var(--blue-light); }
+
+.skill-cell-icon {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 400;
+  color: var(--blue);
+  letter-spacing: 0.12em;
+  margin-bottom: 0.8rem;
+  text-transform: uppercase;
+}
+
+.skill-cell-title { font-size: 13px; font-weight: 700; color: var(--text); margin-bottom: 0.8rem; }
+
+.skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+
+.stag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--text-muted);
+  background: var(--bg);
+  border: 1px solid var(--border-md);
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  letter-spacing: 0.03em;
+}
+
+.stag.java { color: var(--java); border-color: rgba(21,101,192,0.25); background: rgba(21,101,192,0.05); }
+.stag.spring { color: var(--spring); border-color: rgba(46,125,50,0.22); background: rgba(46,125,50,0.05); }
+.stag.api { color: var(--blue); border-color: rgba(27,79,216,0.22); background: var(--blue-light); }
+
+/* ── PROJECTS ── */
+.projects-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+
+.project-card {
+  background: var(--surface);
+  border: 1px solid var(--border-md);
+  border-radius: 10px;
+  padding: 1.75rem;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.22s;
+  text-decoration: none;
+  display: block;
+  color: inherit;
+}
+
+.project-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--blue), #5B8DF5);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s ease;
+}
+
+.project-card:hover { border-color: rgba(27,79,216,0.3); transform: translateY(-3px); box-shadow: 0 8px 32px rgba(27,79,216,0.1); }
+.project-card:hover::before { transform: scaleX(1); }
+
+.project-card.featured {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: start;
+}
+
+.project-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1rem; gap: 1rem; }
+
+.project-num {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--text-dim);
+  letter-spacing: 0.12em;
+}
+
+.project-status {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  padding: 0.22rem 0.65rem;
+  border-radius: 20px;
+}
+
+.status-live { color: var(--green); background: var(--green-bg); border: 1px solid rgba(13,122,85,0.2); }
+.status-dev { color: var(--amber); background: var(--amber-bg); border: 1px solid rgba(160,92,0,0.2); }
+
+.project-title { font-family: 'Instrument Serif', serif; font-size: 1.35rem; color: var(--text); margin-bottom: 0.5rem; letter-spacing: -0.01em; }
+.project-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.25rem; }
+.project-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
+
+.stack-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  letter-spacing: 0.05em;
+  color: var(--blue);
+  background: var(--blue-light);
+  border: 1px solid rgba(27,79,216,0.18);
+  padding: 0.22rem 0.6rem;
+  border-radius: 3px;
+}
+
+.project-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--blue);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.project-visual {
+  width: 240px;
+  height: 170px;
+  background: #0F1C33;
+  border: 1px solid rgba(27,79,216,0.2);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: #6B8CAE;
+  line-height: 1.6;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.code-line { padding: 1px 0; }
+.code-kw { color: #C792EA; }
+.code-cls { color: #FFCB6B; }
+.code-fn { color: #82AAFF; }
+.code-str { color: #C3E88D; }
+.code-ann { color: #F07178; }
+
+.project-card-empty {
+  background: transparent;
+  border: 1.5px dashed var(--border-md);
+  border-radius: 10px;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  cursor: pointer;
+  transition: all 0.2s;
+  gap: 0.6rem;
+}
+
+.project-card-empty:hover { border-color: var(--blue); background: var(--blue-light); }
+.empty-plus { font-family: 'Instrument Serif', serif; font-size: 2.2rem; color: var(--text-dim); line-height: 1; }
+.empty-label { font-size: 11px; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; font-weight: 600; }
+
+/* ── EXPERIENCE ── */
+.bg-surface { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+
+.exp-wrapper { display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 4rem; }
+.exp-timeline { display: flex; flex-direction: column; }
+
+.exp-item {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 1.5rem;
+  padding: 1.6rem 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.exp-item:first-child { padding-top: 0; }
+.exp-item:last-child { border-bottom: none; padding-bottom: 0; }
+
+.exp-year {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 300;
+  color: var(--text-dim);
+  letter-spacing: 0.06em;
+  padding-top: 4px;
+  line-height: 1.5;
+}
+
+.exp-content-role { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 0.2rem; }
+.exp-content-company { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 400; color: var(--blue); letter-spacing: 0.08em; margin-bottom: 0.5rem; }
+.exp-content-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; }
+
+.exp-highlights { display: flex; flex-direction: column; gap: 1rem; }
+
+.highlight-card {
+  background: var(--surface);
+  border: 1px solid var(--border-md);
+  border-left: 3px solid var(--blue);
+  border-radius: 0 8px 8px 0;
+  padding: 1.25rem 1.5rem;
+  transition: box-shadow 0.2s;
+}
+
+.highlight-card:hover { box-shadow: 0 4px 16px rgba(27,79,216,0.08); }
+
+.highlight-num { font-family: 'Instrument Serif', serif; font-size: 2rem; color: var(--blue); line-height: 1; margin-bottom: 0.25rem; }
+.highlight-num span { color: var(--text-muted); font-size: 1rem; }
+.highlight-label { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+/* ── CONTACT ── */
+.contact-inner { max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+
+.contact-left h2 {
+  font-family: 'Instrument Serif', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  letter-spacing: -0.015em;
+  color: var(--text);
+  line-height: 1.15;
+  margin-bottom: 1.1rem;
+}
+
+.contact-left h2 em { color: var(--blue); font-style: italic; }
+.contact-left p { font-size: 14px; color: var(--text-muted); line-height: 1.8; margin-bottom: 2rem; }
+
+.contact-links { display: flex; flex-direction: column; gap: 0.75rem; }
+
+.clink {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.85rem 1.1rem;
+  border: 1px solid var(--border-md);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text);
+  background: var(--surface);
+  transition: all 0.2s;
+}
+
+.clink:hover { border-color: var(--blue); transform: translateX(4px); box-shadow: 0 2px 12px rgba(27,79,216,0.1); }
+
+.clink-icon { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.ci-li { background: #0A66C2; }
+.ci-gh { background: #24292E; }
+.ci-cv { background: var(--blue-light); border: 1px solid rgba(27,79,216,0.2); }
+
+.clink-text { flex: 1; }
+.clink-name { font-size: 13px; font-weight: 600; display: block; margin-bottom: 0.1rem; }
+.clink-sub { font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 300; color: var(--text-muted); letter-spacing: 0.04em; }
+.clink-arr { color: var(--text-dim); font-size: 14px; }
+
+.contact-form { display: flex; flex-direction: column; gap: 0.9rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+
+.form-group label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  font-weight: 400;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+  font-family: 'Syne', sans-serif;
+  font-size: 14px;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border-md);
+  border-radius: 6px;
+  padding: 0.65rem 0.9rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  appearance: none;
+  -webkit-appearance: none;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder { color: var(--text-dim); }
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: var(--blue);
+  box-shadow: 0 0 0 3px rgba(27,79,216,0.1);
+}
+
+.form-group textarea { min-height: 105px; resize: vertical; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+
+/* ── FOOTER ── */
+footer {
+  padding: 1.75rem 4rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+}
+
+.footer-copy { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 300; color: var(--text-dim); letter-spacing: 0.06em; }
+.footer-built { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 300; color: var(--text-dim); }
+.footer-built span { color: var(--java-light); }
+
+.full-sep { width: 100%; height: 1px; background: var(--border); }
+
+/* REVEAL */
+.reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.55s ease, transform 0.55s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* LANG FADE */
+.fading [data-i18n], .fading [data-i18n-html] { opacity: 0; transition: opacity 0.1s ease; }
+</style>
 </head>
 <body>
 
-  <header>
-    <nav>
-      <span class="logo">gustavohub</span>
-      <ul>
-        <li><a href="#about">About</a></li>
-        <li><a href="#stack">Stack</a></li>
-        <li><a href="#projects">Projects</a></li>
-        <li><a href="#contact">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">{ your.name }</a>
+  <ul class="nav-links">
+    <li><a href="#skills" data-i18n="nav_skills">Stack</a></li>
+    <li><a href="#projetos" data-i18n="nav_projects">Projects</a></li>
+    <li><a href="#experiencia" data-i18n="nav_exp">Experience</a></li>
+    <li><a href="#contato" data-i18n="nav_contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-switcher" role="group" aria-label="Language">
+      <button class="lang-btn active" data-lang="en" onclick="setLang('en')"><span class="lang-flag">🇬🇧</span>EN</button>
+      <button class="lang-btn" data-lang="pt" onclick="setLang('pt')"><span class="lang-flag">🇧🇷</span>PT</button>
+      <button class="lang-btn" data-lang="fr" onclick="setLang('fr')"><span class="lang-flag">🇧🇪</span>FR</button>
+      <button class="lang-btn" data-lang="nl" onclick="setLang('nl')"><span class="lang-flag">🇧🇪</span>NL</button>
+    </div>
+    <a href="#contato" class="nav-cta" data-i18n="nav_cta">Available for opportunities</a>
+  </div>
+</nav>
 
-  <section class="hero">
-    <div class="hero-content">
-      <p class="greeting">Hi, I'm</p>
-      <h1>Gustavo Asimoes</h1>
-      <h2>Full Stack Developer</h2>
-      <p class="bio">
-        I build robust backend systems and modern frontend experiences.<br/>
-        Java · Node.js · Angular · React — running on self-managed infrastructure.
-      </p>
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge" data-i18n="hero_badge">Java Developer · Backend Engineer</div>
+      <h1 data-i18n-html="hero_h1">Building <span class="accent">robust</span><br>systems with Java.</h1>
+      <p class="hero-sub" data-i18n="hero_sub">Backend development specialist with Java, Spring Framework, REST APIs and scalable architectures. Focused on clean code, performance and long-lasting solutions.</p>
       <div class="hero-actions">
-        <a href="#projects" class="btn btn-primary">View Projects</a>
-        <a href="#contact" class="btn btn-outline">Get in Touch</a>
+        <a href="#projetos" class="btn-primary">
+          <span data-i18n="hero_cta1">View projects</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#contato" class="btn-ghost" data-i18n="hero_cta2">Get in touch</a>
       </div>
     </div>
-  </section>
-
-  <section id="about" class="section">
-    <div class="container">
-      <h2 class="section-title">About Me</h2>
-      <p>
-        Full Stack Developer based in Belgium, passionate about clean architecture,
-        DevOps practices, and continuous learning. I enjoy working across the full
-        stack — from designing REST APIs to building responsive UIs — and I run my
-        own VPS to host and experiment with projects in a real-world environment.
-      </p>
-    </div>
-  </section>
-
-  <section id="stack" class="section section-dark">
-    <div class="container">
-      <h2 class="section-title">Tech Stack</h2>
-      <div class="stack-grid">
-        <div class="stack-category">
-          <h3>Backend</h3>
-          <ul>
-            <li>Java / Spring Boot</li>
-            <li>Node.js / Express</li>
-            <li>REST APIs</li>
-          </ul>
+    <div class="hero-card">
+      <div class="hero-card-title">// overview</div>
+      <div class="stat-row">
+        <div class="stat-item">
+          <span class="stat-label-s" data-i18n="stat_exp">Experience</span>
+          <span class="stat-num-s">+5 <span style="font-size:1rem;color:var(--text-muted)" data-i18n="stat_yr">yrs</span></span>
         </div>
-        <div class="stack-category">
-          <h3>Frontend</h3>
-          <ul>
-            <li>Angular</li>
-            <li>React</li>
-            <li>HTML / CSS / JS</li>
-          </ul>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-label-s" data-i18n="stat_proj">Projects delivered</span>
+          <span class="stat-num-s">+12</span>
         </div>
-        <div class="stack-category">
-          <h3>DevOps</h3>
-          <ul>
-            <li>Docker / Docker Compose</li>
-            <li>GitHub Actions (CI/CD)</li>
-            <li>Traefik / Nginx</li>
-            <li>Linux / VPS</li>
-          </ul>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-label-s" data-i18n="stat_co">Companies served</span>
+          <span class="stat-num-s">3</span>
         </div>
-        <div class="stack-category">
-          <h3>Database</h3>
-          <ul>
-            <li>PostgreSQL</li>
-            <li>MySQL</li>
-            <li>MongoDB</li>
-          </ul>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-label-s" data-i18n="stat_apis">APIs built</span>
+          <span class="stat-num-s">+30</span>
+        </div>
+      </div>
+      <div class="hero-tech-row">
+        <div class="hero-tech-label">// core stack</div>
+        <div class="tech-pills">
+          <span class="tech-pill">Java 17+</span>
+          <span class="tech-pill">Spring Boot</span>
+          <span class="tech-pill">REST</span>
+          <span class="tech-pill">SOAP</span>
+          <span class="tech-pill">PostgreSQL</span>
+          <span class="tech-pill">Docker</span>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <section id="projects" class="section">
-    <div class="container">
-      <h2 class="section-title">Projects</h2>
-      <div class="projects-grid">
-        <div class="project-card">
-          <div class="project-tag">Java / Spring Boot</div>
-          <h3>Coming soon</h3>
-          <p>A project will be available here for live testing.</p>
+<!-- SKILLS -->
+<div class="skills-section" id="skills">
+  <div class="skills-wrap">
+    <div class="section-label reveal">
+      <span class="section-num">// 01 — STACK</span>
+      <div class="section-line"></div>
+    </div>
+    <div class="skills-grid reveal">
+      <div class="skill-cell">
+        <div class="skill-cell-icon">CORE</div>
+        <div class="skill-cell-title">Java Platform</div>
+        <div class="skill-tags">
+          <span class="stag java">Java 8–21</span>
+          <span class="stag java">Java EE</span>
+          <span class="stag java">Jakarta EE</span>
+          <span class="stag">Maven</span>
+          <span class="stag">Gradle</span>
+          <span class="stag">JUnit</span>
         </div>
-        <div class="project-card">
-          <div class="project-tag">Node.js</div>
-          <h3>Coming soon</h3>
-          <p>A project will be available here for live testing.</p>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-cell-icon">FRAMEWORK</div>
+        <div class="skill-cell-title">Spring Ecosystem</div>
+        <div class="skill-tags">
+          <span class="stag spring">Spring Boot</span>
+          <span class="stag spring">Spring MVC</span>
+          <span class="stag spring">Spring Security</span>
+          <span class="stag spring">Spring Data JPA</span>
+          <span class="stag spring">Spring Cloud</span>
         </div>
-        <div class="project-card">
-          <div class="project-tag">Angular</div>
-          <h3>Coming soon</h3>
-          <p>A project will be available here for live testing.</p>
+      </div>
+      <div class="skill-cell">
+        <div class="skill-cell-icon">API</div>
+        <div class="skill-cell-title" data-i18n="skill_api">Integration &amp; APIs</div>
+        <div class="skill-tags">
+          <span class="stag api">REST</span>
+          <span class="stag api">RESTful</span>
+          <span class="stag api">SOAP / WSDL</span>
+          <span class="stag api">Swagger</span>
+          <span class="stag api">OpenAPI</span>
+          <span class="stag">JWT / OAuth2</span>
         </div>
-        <div class="project-card">
-          <div class="project-tag">React</div>
-          <h3>Coming soon</h3>
-          <p>A project will be available here for live testing.</p>
+      </div>
+      <div class="skill-cell" style="border-right:none">
+        <div class="skill-cell-icon">DATA</div>
+        <div class="skill-cell-title" data-i18n="skill_data">Database</div>
+        <div class="skill-tags">
+          <span class="stag">PostgreSQL</span>
+          <span class="stag">MySQL</span>
+          <span class="stag">Oracle DB</span>
+          <span class="stag">Hibernate</span>
+          <span class="stag">Redis</span>
+          <span class="stag">MongoDB</span>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</div>
 
-  <section id="contact" class="section section-dark">
-    <div class="container contact-container">
-      <h2 class="section-title">Get in Touch</h2>
-      <p>Feel free to reach out for collaborations or just a friendly chat.</p>
+<!-- PROJECTS -->
+<div class="section" id="projetos">
+  <div class="section-label reveal">
+    <span class="section-num" data-i18n="s2_label">// 02 — PROJECTS</span>
+    <div class="section-line"></div>
+  </div>
+  <h2 class="section-title reveal" data-i18n="s2_title">Projects developed</h2>
+  <p class="section-sub reveal" data-i18n="s2_sub">Backend solutions built in personal and professional projects — solid architectures, clean code, and APIs that scale.</p>
+  <div class="projects-grid">
+    <!-- FEATURED -->
+    <div class="project-card featured reveal">
+      <div>
+        <div class="project-header">
+          <span class="project-num" data-i18n="p1_num">001 — Featured</span>
+          <span class="project-status status-live" data-i18n="st_live">● Live</span>
+        </div>
+        <h3 class="project-title" data-i18n="p1_title">Financial Management System</h3>
+        <p class="project-desc" data-i18n="p1_desc">Full RESTful API for enterprise financial control. JWT authentication, real-time reports, legacy system integration via SOAP and microservices architecture with Spring Cloud.</p>
+        <div class="project-stack">
+          <span class="stack-tag">Java 17</span>
+          <span class="stack-tag">Spring Boot 3</span>
+          <span class="stack-tag">Spring Security</span>
+          <span class="stack-tag">PostgreSQL</span>
+          <span class="stack-tag">SOAP</span>
+          <span class="stack-tag">Docker</span>
+          <span class="stack-tag">REST API</span>
+        </div>
+        <span class="project-link">
+          <span data-i18n="p_view">View project</span>
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        </span>
+      </div>
+      <div class="project-visual">
+        <div class="code-line"><span class="code-ann">@RestController</span></div>
+        <div class="code-line"><span class="code-ann">@RequestMapping</span>(<span class="code-str">"/api/v1"</span>)</div>
+        <div class="code-line"><span class="code-kw">public class</span> <span class="code-cls">FinanceCtrl</span> {</div>
+        <div class="code-line">&nbsp;</div>
+        <div class="code-line">&nbsp;&nbsp;<span class="code-ann">@Autowired</span></div>
+        <div class="code-line">&nbsp;&nbsp;<span class="code-kw">private</span> <span class="code-cls">FinanceService</span> svc;</div>
+        <div class="code-line">&nbsp;</div>
+        <div class="code-line">&nbsp;&nbsp;<span class="code-ann">@GetMapping</span>(<span class="code-str">"/report"</span>)</div>
+        <div class="code-line">&nbsp;&nbsp;<span class="code-kw">public</span> <span class="code-cls">ResponseEntity</span>&lt;<span class="code-cls">Report</span>&gt;</div>
+        <div class="code-line">&nbsp;&nbsp;<span class="code-fn">getReport</span>() {</div>
+        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-kw">return</span> <span class="code-cls">ResponseEntity</span></div>
+        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<span class="code-fn">ok</span>(svc.<span class="code-fn">generate</span>());</div>
+        <div class="code-line">&nbsp;&nbsp;}</div>
+        <div class="code-line">}</div>
+      </div>
+    </div>
+    <!-- CARD 2 -->
+    <div class="project-card reveal">
+      <div class="project-header">
+        <span class="project-num">002</span>
+        <span class="project-status status-live" data-i18n="st_live">● Live</span>
+      </div>
+      <h3 class="project-title" data-i18n="p2_title">Legacy SOAP Integration</h3>
+      <p class="project-desc" data-i18n="p2_desc">Integration middleware between legacy systems (SOAP/XML) and modern REST APIs. Data transformation, error handling and automatic retry.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Java 11</span>
+        <span class="stack-tag">Spring WS</span>
+        <span class="stack-tag">SOAP</span>
+        <span class="stack-tag">JAXB</span>
+        <span class="stack-tag">Oracle DB</span>
+      </div>
+      <span class="project-link" data-i18n="p_details">View details →</span>
+    </div>
+    <!-- CARD 3 -->
+    <div class="project-card reveal">
+      <div class="project-header">
+        <span class="project-num">003</span>
+        <span class="project-status status-dev" data-i18n="st_dev">◐ In development</span>
+      </div>
+      <h3 class="project-title" data-i18n="p3_title">Centralized Auth API</h3>
+      <p class="project-desc" data-i18n="p3_desc">Centralized authentication and authorization service with OAuth2, OpenID Connect and JWT token management for multiple applications.</p>
+      <div class="project-stack">
+        <span class="stack-tag">Spring Security</span>
+        <span class="stack-tag">OAuth2</span>
+        <span class="stack-tag">JWT</span>
+        <span class="stack-tag">Redis</span>
+      </div>
+      <span class="project-link" data-i18n="p_details">View details →</span>
+    </div>
+    <!-- EMPTY -->
+    <div class="project-card-empty reveal">
+      <div class="empty-plus">+</div>
+      <div class="empty-label" data-i18n="p_add">Add project</div>
+    </div>
+  </div>
+</div>
+
+<div class="full-sep"></div>
+
+<!-- EXPERIENCE -->
+<div class="bg-surface" id="experiencia">
+  <div class="section">
+    <div class="section-label reveal">
+      <span class="section-num" data-i18n="s3_label">// 03 — EXPERIENCE</span>
+      <div class="section-line"></div>
+    </div>
+    <h2 class="section-title reveal" data-i18n="s3_title">Professional journey</h2>
+    <p class="section-sub reveal" data-i18n="s3_sub">Building backend solutions across different industries and contexts.</p>
+    <div class="exp-wrapper">
+      <div class="exp-timeline reveal">
+        <div class="exp-item">
+          <div class="exp-year">2022<br>—<br><span data-i18n="exp_now">Present</span></div>
+          <div>
+            <p class="exp-content-role" data-i18n="e1_role">Senior Java Developer</p>
+            <p class="exp-content-company">// Company name</p>
+            <p class="exp-content-desc" data-i18n="e1_desc">Microservices development with Spring Boot and Spring Cloud. REST and SOAP API design and consumption. Technical leadership in backend squad.</p>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-year">2020<br>—<br>2022</div>
+          <div>
+            <p class="exp-content-role" data-i18n="e2_role">Mid-level Java Developer</p>
+            <p class="exp-content-company">// Company name</p>
+            <p class="exp-content-desc" data-i18n="e2_desc">Maintenance and evolution of Java EE systems. Payment system integration via SOAP. Gradual migration to Spring Boot.</p>
+          </div>
+        </div>
+        <div class="exp-item">
+          <div class="exp-year">2018<br>—<br>2020</div>
+          <div>
+            <p class="exp-content-role" data-i18n="e3_role">Junior Java Developer</p>
+            <p class="exp-content-company">// Company name</p>
+            <p class="exp-content-desc" data-i18n="e3_desc">Career start with Java EE and JSF. Module development for internal ERP system. Learning design patterns and best practices.</p>
+          </div>
+        </div>
+      </div>
+      <div class="exp-highlights reveal">
+        <div class="highlight-card">
+          <div class="highlight-num">+5 <span data-i18n="hl_yr">yrs</span></div>
+          <div class="highlight-label" data-i18n="hl1">Building Java systems in production environments</div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-num">+30</div>
+          <div class="highlight-label" data-i18n="hl2">APIs designed and documented with Swagger / OpenAPI</div>
+        </div>
+        <div class="highlight-card">
+          <div class="highlight-num">3</div>
+          <div class="highlight-label" data-i18n="hl3">Legacy system migrations to modern architecture</div>
+        </div>
+        <div class="highlight-card" style="border-left-color:#E3712A">
+          <div class="highlight-num" style="font-size:1rem;font-family:'JetBrains Mono',monospace;font-weight:300;color:#E3712A">Java 8 → 21</div>
+          <div class="highlight-label" data-i18n="hl4">Experience across multiple Java ecosystem versions</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="full-sep"></div>
+
+<!-- CONTACT -->
+<div class="section" id="contato">
+  <div class="section-label reveal">
+    <span class="section-num" data-i18n="s4_label">// 04 — CONTACT</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="contact-inner">
+    <div class="contact-left reveal">
+      <h2 data-i18n-html="contact_h2">Let's build something <em>solid</em> together.</h2>
+      <p data-i18n="contact_p">Open to opportunities as a senior Java developer, freelance projects and technical consulting. If you need a robust backend, we're on the same page.</p>
       <div class="contact-links">
-        <a href="mailto:gustavo.asimoes1@gmail.com" class="btn btn-primary">Email Me</a>
-        <a href="https://github.com/gustavo-as" target="_blank" class="btn btn-outline">GitHub</a>
-        <a href="https://linkedin.com/in/gustavo-simoes" target="_blank" class="btn btn-outline">LinkedIn</a>
+        <a href="https://linkedin.com" target="_blank" class="clink">
+          <div class="clink-icon ci-li">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="white"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2" fill="white"/></svg>
+          </div>
+          <div class="clink-text">
+            <span class="clink-name">LinkedIn</span>
+            <span class="clink-sub">linkedin.com/in/yourprofile</span>
+          </div>
+          <span class="clink-arr">→</span>
+        </a>
+        <a href="https://github.com" target="_blank" class="clink">
+          <div class="clink-icon ci-gh">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          </div>
+          <div class="clink-text">
+            <span class="clink-name">GitHub</span>
+            <span class="clink-sub">github.com/yourusername</span>
+          </div>
+          <span class="clink-arr">→</span>
+        </a>
+        <a href="#" class="clink">
+          <div class="clink-icon ci-cv">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#1B4FD8" stroke-width="1.8"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+          </div>
+          <div class="clink-text">
+            <span class="clink-name" data-i18n="cv_name">Resume</span>
+            <span class="clink-sub" data-i18n="cv_sub">Download PDF</span>
+          </div>
+          <span class="clink-arr">↓</span>
+        </a>
       </div>
     </div>
-  </section>
+    <div class="contact-form reveal">
+      <div class="form-row">
+        <div class="form-group">
+          <label data-i18n="f_name">Name</label>
+          <input type="text" id="inp_name" placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label data-i18n="f_co">Company</label>
+          <input type="text" id="inp_co" placeholder="Your company">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>E-mail</label>
+        <input type="email" placeholder="email@company.com">
+      </div>
+      <div class="form-group">
+        <label data-i18n="f_type">Opportunity type</label>
+        <select>
+          <option value="" disabled selected id="sel_ph">Select...</option>
+          <option id="sel_o1">Full-time / Contract</option>
+          <option id="sel_o2">Freelance Project</option>
+          <option id="sel_o3">Technical Consulting</option>
+          <option id="sel_o4">Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label data-i18n="f_msg">Message</label>
+        <textarea id="inp_msg" placeholder="Describe the opportunity or project..."></textarea>
+      </div>
+      <button class="btn-primary" onclick="alert('Message sent!')">
+        <span data-i18n="f_send">Send message</span>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+      </button>
+    </div>
+  </div>
+</div>
 
-  <footer>
-    <p>© 2026 Gustavo Asimoes · gustavohub.com · Built with ☕ and deployed via CI/CD</p>
-  </footer>
+<footer>
+  <span class="footer-copy">© 2026 — Your Name · Java Developer</span>
+  <span class="footer-built">built with <span>Java ♥</span></span>
+</footer>
 
+<script>
+const T = {
+  en: {
+    nav_skills:"Stack", nav_projects:"Projects", nav_exp:"Experience", nav_contact:"Contact",
+    nav_cta:"Available for opportunities",
+    hero_badge:"Java Developer · Backend Engineer",
+    hero_h1:'Building <span class="accent">robust</span><br>systems with Java.',
+    hero_sub:"Backend development specialist with Java, Spring Framework, REST APIs and scalable architectures. Focused on clean code, performance and long-lasting solutions.",
+    hero_cta1:"View projects", hero_cta2:"Get in touch",
+    stat_yr:"yrs", stat_exp:"Experience", stat_proj:"Projects delivered", stat_co:"Companies served", stat_apis:"APIs built",
+    skill_api:"Integration & APIs", skill_data:"Database",
+    s2_label:"// 02 — PROJECTS", s2_title:"Projects developed",
+    s2_sub:"Backend solutions built in personal and professional projects — solid architectures, clean code, and APIs that scale.",
+    p1_num:"001 — Featured", st_live:"● Live", st_dev:"◐ In development",
+    p1_title:"Financial Management System",
+    p1_desc:"Full RESTful API for enterprise financial control. JWT authentication, real-time reports, legacy system integration via SOAP and microservices architecture with Spring Cloud.",
+    p_view:"View project",
+    p2_title:"Legacy SOAP Integration",
+    p2_desc:"Integration middleware between legacy systems (SOAP/XML) and modern REST APIs. Data transformation, error handling and automatic retry.",
+    p_details:"View details →",
+    p3_title:"Centralized Auth API",
+    p3_desc:"Centralized authentication and authorization service with OAuth2, OpenID Connect and JWT token management for multiple applications.",
+    p_add:"Add project",
+    s3_label:"// 03 — EXPERIENCE", s3_title:"Professional journey",
+    s3_sub:"Building backend solutions across different industries and contexts.",
+    exp_now:"Present", e1_role:"Senior Java Developer",
+    e1_desc:"Microservices development with Spring Boot and Spring Cloud. REST and SOAP API design and consumption. Technical leadership in backend squad.",
+    e2_role:"Mid-level Java Developer",
+    e2_desc:"Maintenance and evolution of Java EE systems. Payment system integration via SOAP. Gradual migration to Spring Boot.",
+    e3_role:"Junior Java Developer",
+    e3_desc:"Career start with Java EE and JSF. Module development for internal ERP system. Learning design patterns and best practices.",
+    hl_yr:"yrs", hl1:"Building Java systems in production environments",
+    hl2:"APIs designed and documented with Swagger / OpenAPI",
+    hl3:"Legacy system migrations to modern architecture",
+    hl4:"Experience across multiple Java ecosystem versions",
+    s4_label:"// 04 — CONTACT",
+    contact_h2:'Let\'s build something <em>solid</em> together.',
+    contact_p:"Open to opportunities as a senior Java developer, freelance projects and technical consulting. If you need a robust backend, we're on the same page.",
+    cv_name:"Resume", cv_sub:"Download PDF",
+    f_name:"Name", f_co:"Company", f_type:"Opportunity type", f_msg:"Message", f_send:"Send message",
+    inp_name_ph:"Your name", inp_co_ph:"Your company", inp_msg_ph:"Describe the opportunity or project...",
+    sel_ph:"Select...", sel_o1:"Full-time / Contract", sel_o2:"Freelance Project", sel_o3:"Technical Consulting", sel_o4:"Other"
+  },
+  pt: {
+    nav_skills:"Stack", nav_projects:"Projetos", nav_exp:"Experiência", nav_contact:"Contato",
+    nav_cta:"Disponível para oportunidades",
+    hero_badge:"Desenvolvedor Java · Engenheiro Backend",
+    hero_h1:'Construindo sistemas <span class="accent">robustos</span><br>com Java.',
+    hero_sub:"Especialista em desenvolvimento backend com Java, Spring Framework, APIs REST e arquiteturas escaláveis. Focado em código limpo, performance e soluções que duram.",
+    hero_cta1:"Ver projetos", hero_cta2:"Entre em contato",
+    stat_yr:"anos", stat_exp:"Experiência", stat_proj:"Projetos entregues", stat_co:"Empresas atendidas", stat_apis:"APIs construídas",
+    skill_api:"Integração & APIs", skill_data:"Banco de Dados",
+    s2_label:"// 02 — PROJETOS", s2_title:"Projetos desenvolvidos",
+    s2_sub:"Soluções backend criadas em projetos pessoais e empresariais — arquiteturas sólidas, código limpo e APIs que escalam.",
+    p1_num:"001 — Destaque", st_live:"● Em produção", st_dev:"◐ Em desenvolvimento",
+    p1_title:"Sistema de Gestão Financeira",
+    p1_desc:"API RESTful completa para controle financeiro empresarial. Autenticação JWT, relatórios em tempo real, integração com sistemas legados via SOAP e microsserviços com Spring Cloud.",
+    p_view:"Ver projeto",
+    p2_title:"Integração SOAP Legado",
+    p2_desc:"Middleware de integração entre sistemas legados (SOAP/XML) e APIs modernas REST. Transformação de dados, tratamento de falhas e retry automático.",
+    p_details:"Ver detalhes →",
+    p3_title:"API de Autenticação Centralizada",
+    p3_desc:"Serviço centralizado de autenticação e autorização com OAuth2, OpenID Connect e gestão de tokens JWT para múltiplas aplicações.",
+    p_add:"Adicionar projeto",
+    s3_label:"// 03 — EXPERIÊNCIA", s3_title:"Trajetória profissional",
+    s3_sub:"Experiências construindo soluções backend em diferentes contextos e setores.",
+    exp_now:"Atual", e1_role:"Desenvolvedor Java Sênior",
+    e1_desc:"Desenvolvimento de microsserviços com Spring Boot e Spring Cloud. Exposição e consumo de APIs REST e SOAP. Liderança técnica em squad de backend.",
+    e2_role:"Desenvolvedor Java Pleno",
+    e2_desc:"Manutenção e evolução de sistemas Java EE. Integração com sistemas de pagamento via SOAP. Migração gradual para Spring Boot.",
+    e3_role:"Desenvolvedor Java Junior",
+    e3_desc:"Início da carreira com Java EE e JSF. Desenvolvimento de módulos para sistema ERP interno. Aprendizado de padrões de projeto e boas práticas.",
+    hl_yr:"anos", hl1:"Desenvolvendo com Java em ambientes de produção",
+    hl2:"APIs projetadas e documentadas com Swagger / OpenAPI",
+    hl3:"Migrações de sistemas legados para arquitetura moderna",
+    hl4:"Experiência com múltiplas versões do ecossistema Java",
+    s4_label:"// 04 — CONTATO",
+    contact_h2:'Vamos construir algo <em>sólido</em> juntos.',
+    contact_p:"Aberto a oportunidades como desenvolvedor Java sênior, projetos freelance e consultorias técnicas. Se precisar de um backend robusto, estamos no mesmo page.",
+    cv_name:"Currículo", cv_sub:"Baixar PDF",
+    f_name:"Nome", f_co:"Empresa", f_type:"Tipo de oportunidade", f_msg:"Mensagem", f_send:"Enviar mensagem",
+    inp_name_ph:"Seu nome", inp_co_ph:"Sua empresa", inp_msg_ph:"Descreva a oportunidade ou o projeto...",
+    sel_ph:"Selecione...", sel_o1:"CLT / PJ", sel_o2:"Projeto Freelance", sel_o3:"Consultoria Técnica", sel_o4:"Outro"
+  },
+  fr: {
+    nav_skills:"Stack", nav_projects:"Projets", nav_exp:"Expérience", nav_contact:"Contact",
+    nav_cta:"Disponible pour des opportunités",
+    hero_badge:"Développeur Java · Ingénieur Backend",
+    hero_h1:'Concevoir des systèmes <span class="accent">robustes</span><br>avec Java.',
+    hero_sub:"Spécialiste du développement backend en Java, Spring Framework, APIs REST et architectures scalables. Axé sur le code propre, la performance et des solutions durables.",
+    hero_cta1:"Voir les projets", hero_cta2:"Me contacter",
+    stat_yr:"ans", stat_exp:"Expérience", stat_proj:"Projets livrés", stat_co:"Entreprises servies", stat_apis:"APIs construites",
+    skill_api:"Intégration & APIs", skill_data:"Base de données",
+    s2_label:"// 02 — PROJETS", s2_title:"Projets développés",
+    s2_sub:"Solutions backend créées dans des projets personnels et professionnels — architectures solides, code propre et APIs qui scalent.",
+    p1_num:"001 — À la une", st_live:"● En production", st_dev:"◐ En développement",
+    p1_title:"Système de gestion financière",
+    p1_desc:"API RESTful complète pour le contrôle financier d'entreprise. Authentification JWT, rapports temps réel, intégration systèmes legacy via SOAP et microservices avec Spring Cloud.",
+    p_view:"Voir le projet",
+    p2_title:"Intégration SOAP Legacy",
+    p2_desc:"Middleware d'intégration entre systèmes legacy (SOAP/XML) et APIs REST modernes. Transformation de données, gestion des erreurs et retry automatique.",
+    p_details:"Voir les détails →",
+    p3_title:"API d'authentification centralisée",
+    p3_desc:"Service centralisé d'authentification et d'autorisation avec OAuth2, OpenID Connect et gestion des tokens JWT pour plusieurs applications.",
+    p_add:"Ajouter un projet",
+    s3_label:"// 03 — EXPÉRIENCE", s3_title:"Parcours professionnel",
+    s3_sub:"Construction de solutions backend dans différents secteurs et contextes.",
+    exp_now:"Présent", e1_role:"Développeur Java Senior",
+    e1_desc:"Développement de microservices avec Spring Boot et Spring Cloud. Conception et consommation d'APIs REST et SOAP. Leadership technique dans l'équipe backend.",
+    e2_role:"Développeur Java Confirmé",
+    e2_desc:"Maintenance et évolution de systèmes Java EE. Intégration de systèmes de paiement via SOAP. Migration progressive vers Spring Boot.",
+    e3_role:"Développeur Java Junior",
+    e3_desc:"Début de carrière avec Java EE et JSF. Développement de modules pour un ERP interne. Apprentissage des design patterns et bonnes pratiques.",
+    hl_yr:"ans", hl1:"Développement Java en environnements de production",
+    hl2:"APIs conçues et documentées avec Swagger / OpenAPI",
+    hl3:"Migrations de systèmes legacy vers une architecture moderne",
+    hl4:"Expérience sur plusieurs versions de l'écosystème Java",
+    s4_label:"// 04 — CONTACT",
+    contact_h2:'Construisons quelque chose de <em>solide</em> ensemble.',
+    contact_p:"Ouvert aux opportunités en tant que développeur Java senior, projets freelance et conseil technique. Si vous avez besoin d'un backend robuste, nous sommes sur la même longueur d'onde.",
+    cv_name:"CV", cv_sub:"Télécharger PDF",
+    f_name:"Nom", f_co:"Entreprise", f_type:"Type d'opportunité", f_msg:"Message", f_send:"Envoyer le message",
+    inp_name_ph:"Votre nom", inp_co_ph:"Votre entreprise", inp_msg_ph:"Décrivez l'opportunité ou le projet...",
+    sel_ph:"Sélectionner...", sel_o1:"CDI / Freelance", sel_o2:"Projet Freelance", sel_o3:"Conseil Technique", sel_o4:"Autre"
+  },
+  nl: {
+    nav_skills:"Stack", nav_projects:"Projecten", nav_exp:"Ervaring", nav_contact:"Contact",
+    nav_cta:"Beschikbaar voor kansen",
+    hero_badge:"Java Ontwikkelaar · Backend Engineer",
+    hero_h1:'Robuuste systemen <span class="accent">bouwen</span><br>met Java.',
+    hero_sub:"Backend ontwikkelingsspecialist met Java, Spring Framework, REST API's en schaalbare architecturen. Gericht op schone code, prestaties en duurzame oplossingen.",
+    hero_cta1:"Bekijk projecten", hero_cta2:"Neem contact op",
+    stat_yr:"jr", stat_exp:"Ervaring", stat_proj:"Geleverde projecten", stat_co:"Bedrijven bediend", stat_apis:"Gebouwde API's",
+    skill_api:"Integratie & API's", skill_data:"Database",
+    s2_label:"// 02 — PROJECTEN", s2_title:"Ontwikkelde projecten",
+    s2_sub:"Backend-oplossingen gebouwd in persoonlijke en professionele projecten — solide architecturen, schone code en API's die schalen.",
+    p1_num:"001 — Uitgelicht", st_live:"● In productie", st_dev:"◐ In ontwikkeling",
+    p1_title:"Financieel Beheersysteem",
+    p1_desc:"Volledige RESTful API voor zakelijke financiële controle. JWT-authenticatie, realtime rapporten, integratie van legacy-systemen via SOAP en microservices-architectuur met Spring Cloud.",
+    p_view:"Project bekijken",
+    p2_title:"Legacy SOAP Integratie",
+    p2_desc:"Integratie-middleware tussen legacy-systemen (SOAP/XML) en moderne REST API's. Datatransformatie, foutafhandeling en automatisch opnieuw proberen.",
+    p_details:"Details bekijken →",
+    p3_title:"Gecentraliseerde Auth API",
+    p3_desc:"Gecentraliseerde authenticatie- en autorisatieservice met OAuth2, OpenID Connect en JWT-tokenbeheer voor meerdere applicaties.",
+    p_add:"Project toevoegen",
+    s3_label:"// 03 — ERVARING", s3_title:"Professionele loopbaan",
+    s3_sub:"Backend-oplossingen bouwen in verschillende sectoren en contexten.",
+    exp_now:"Heden", e1_role:"Senior Java Ontwikkelaar",
+    e1_desc:"Microservices-ontwikkeling met Spring Boot en Spring Cloud. REST- en SOAP API-ontwerp en -gebruik. Technisch leiderschap in backend-squad.",
+    e2_role:"Medior Java Ontwikkelaar",
+    e2_desc:"Onderhoud en evolutie van Java EE-systemen. Integratie van betaalsystemen via SOAP. Geleidelijke migratie naar Spring Boot.",
+    e3_role:"Junior Java Ontwikkelaar",
+    e3_desc:"Carrièrestart met Java EE en JSF. Module-ontwikkeling voor intern ERP-systeem. Leren van ontwerppatronen en beste praktijken.",
+    hl_yr:"jr", hl1:"Java-systemen bouwen in productieomgevingen",
+    hl2:"API's ontworpen en gedocumenteerd met Swagger / OpenAPI",
+    hl3:"Legacy-systeemmigraties naar moderne architectuur",
+    hl4:"Ervaring met meerdere versies van het Java-ecosysteem",
+    s4_label:"// 04 — CONTACT",
+    contact_h2:'Laten we samen iets <em>solides</em> bouwen.',
+    contact_p:"Open voor kansen als senior Java-ontwikkelaar, freelanceprojecten en technisch advies. Als u een robuuste backend nodig heeft, zitten we op dezelfde lijn.",
+    cv_name:"CV", cv_sub:"PDF downloaden",
+    f_name:"Naam", f_co:"Bedrijf", f_type:"Type kans", f_msg:"Bericht", f_send:"Bericht verzenden",
+    inp_name_ph:"Uw naam", inp_co_ph:"Uw bedrijf", inp_msg_ph:"Beschrijf de kans of het project...",
+    sel_ph:"Selecteer...", sel_o1:"Vast / Freelance", sel_o2:"Freelanceproject", sel_o3:"Technisch Advies", sel_o4:"Anders"
+  }
+};
+
+let currentLang = 'en';
+
+function setLang(lang) {
+  if (lang === currentLang) return;
+  currentLang = lang;
+
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.dataset.lang === lang));
+  document.documentElement.lang = {en:'en',pt:'pt-BR',fr:'fr-BE',nl:'nl-BE'}[lang];
+
+  document.body.classList.add('fading');
+
+  setTimeout(() => {
+    const t = T[lang];
+
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const k = el.dataset.i18n;
+      if (t[k] !== undefined) el.textContent = t[k];
+    });
+
+    document.querySelectorAll('[data-i18n-html]').forEach(el => {
+      const k = el.dataset.i18nHtml;
+      if (t[k] !== undefined) el.innerHTML = t[k];
+    });
+
+    // placeholders
+    const ph = {inp_name:'inp_name_ph', inp_co:'inp_co_ph', inp_msg:'inp_msg_ph'};
+    Object.entries(ph).forEach(([id, key]) => {
+      const el = document.getElementById(id);
+      if (el && t[key]) el.placeholder = t[key];
+    });
+
+    // select options
+    ['sel_ph','sel_o1','sel_o2','sel_o3','sel_o4'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el && t[id]) el.textContent = t[id];
+    });
+
+    document.body.classList.remove('fading');
+  }, 110);
+}
+
+// Scroll reveal
+const obs = new IntersectionObserver((entries) => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 70);
+  });
+}, { threshold: 0.07 });
+
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
 </body>
 </html>
