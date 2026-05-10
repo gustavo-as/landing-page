@@ -1,32 +1,24 @@
 services:
 
-  # ── Frontend — Nginx serve o HTML estático ──
   landing-page:
     build:
       context: .
       dockerfile: Dockerfile
     container_name: landing-page
     restart: unless-stopped
-    depends_on:
-      portfolio-api:
-        condition: service_healthy
+    healthcheck:
+      disable: true
     networks:
       - traefik-network
       - internal
     labels:
       - "traefik.enable=true"
-      # Rotas HTTP e HTTPS
+      - "traefik.docker.network=traefik-network"
       - "traefik.http.routers.landing.rule=Host(`gustavohub.com`) || Host(`www.gustavohub.com`)"
       - "traefik.http.routers.landing.entrypoints=websecure"
       - "traefik.http.routers.landing.tls.certresolver=letsencrypt"
       - "traefik.http.services.landing.loadbalancer.server.port=80"
-      # Redireciona www → apex (opcional)
-      - "traefik.http.middlewares.www-redirect.redirectregex.regex=^https://www\\.gustavohub\\.com/(.*)"
-      - "traefik.http.middlewares.www-redirect.redirectregex.replacement=https://gustavohub.com/$${1}"
-      - "traefik.http.middlewares.www-redirect.redirectregex.permanent=true"
-      - "traefik.http.routers.landing.middlewares=www-redirect"
 
-  # ── Backend — Node.js API de email ──────────
   portfolio-api:
     build:
       context: .
@@ -34,9 +26,17 @@ services:
     container_name: portfolio-api
     restart: unless-stopped
     networks:
-      - internal          # apenas rede interna — não exposto ao Traefik
+      - traefik-network
+      - internal
     env_file:
-      - .env              # credenciais de email
+      - .env
+    labels:
+      - "traefik.enable=true"
+      - "traefik.docker.network=traefik-network"
+      - "traefik.http.routers.portfolio-api.rule=Host(`contact.gustavohub.com`)"
+      - "traefik.http.routers.portfolio-api.entrypoints=websecure"
+      - "traefik.http.routers.portfolio-api.tls.certresolver=letsencrypt"
+      - "traefik.http.services.portfolio-api.loadbalancer.server.port=3000"
     healthcheck:
       test: ["CMD", "wget", "-qO-", "http://localhost:3000/health"]
       interval: 30s
@@ -46,6 +46,6 @@ services:
 
 networks:
   traefik-network:
-    external: true        # rede já criada pelo Traefik na VPS
+    external: true
   internal:
-    driver: bridge        # rede privada entre frontend e backend
+    driver: bridge
