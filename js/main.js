@@ -20,7 +20,7 @@ const T = {
     p3_title:"Centralized Auth API",
     p3_desc:"Centralized authentication and authorization service with OAuth2, OpenID Connect and JWT token management for multiple applications.",
     p4_title:"Personal Portfolio",
-    p4_desc:"Full-stack portfolio built with Node.js backend, multi-container Docker setup with Traefik reverse proxy, automated SSL, CI/CD via GitHub Actions and transactional email via Resend.",
+    p4_desc:"Full-stack portfolio with Node.js backend, multi-container Docker setup with Traefik reverse proxy, automated SSL, CI/CD via GitHub Actions and transactional email via Resend.",
     p_add:"Add project",
     s3_label:"// 03 — EXPERIENCE", s3_title:"Professional journey",
     s3_sub:"Building backend solutions across different industries and contexts.",
