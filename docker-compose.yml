@@ -1,17 +1,51 @@
 services:
+
+  # ── Frontend — Nginx serve o HTML estático ──
   landing-page:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
     container_name: landing-page
     restart: unless-stopped
+    depends_on:
+      portfolio-api:
+        condition: service_healthy
     networks:
       - traefik-network
+      - internal
     labels:
       - "traefik.enable=true"
+      # Rotas HTTP e HTTPS
       - "traefik.http.routers.landing.rule=Host(`gustavohub.com`) || Host(`www.gustavohub.com`)"
       - "traefik.http.routers.landing.entrypoints=websecure"
       - "traefik.http.routers.landing.tls.certresolver=letsencrypt"
       - "traefik.http.services.landing.loadbalancer.server.port=80"
+      # Redireciona www → apex (opcional)
+      - "traefik.http.middlewares.www-redirect.redirectregex.regex=^https://www\\.gustavohub\\.com/(.*)"
+      - "traefik.http.middlewares.www-redirect.redirectregex.replacement=https://gustavohub.com/$${1}"
+      - "traefik.http.middlewares.www-redirect.redirectregex.permanent=true"
+      - "traefik.http.routers.landing.middlewares=www-redirect"
+
+  # ── Backend — Node.js API de email ──────────
+  portfolio-api:
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    container_name: portfolio-api
+    restart: unless-stopped
+    networks:
+      - internal          # apenas rede interna — não exposto ao Traefik
+    env_file:
+      - .env              # credenciais de email
+    healthcheck:
+      test: ["CMD", "wget", "-qO-", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
 
 networks:
   traefik-network:
-    external: true
+    external: true        # rede já criada pelo Traefik na VPS
+  internal:
+    driver: bridge        # rede privada entre frontend e backend

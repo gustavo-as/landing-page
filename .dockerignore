@@ -1,0 +1,7 @@
+node_modules
+.env
+*.md
+ecosystem.config.js
+nginx-portfolio.conf
+.git
+.gitignore
