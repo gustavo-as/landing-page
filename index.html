@@ -735,6 +735,7 @@ footer {
 
 /* LANG FADE */
 .fading [data-i18n], .fading [data-i18n-html] { opacity: 0; transition: opacity 0.1s ease; }
+@keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 </style>
 </head>
 <body>
@@ -1097,10 +1098,12 @@ footer {
         <label data-i18n="f_msg">Message</label>
         <textarea id="inp_msg" placeholder="Describe the opportunity or project..."></textarea>
       </div>
-      <button class="btn-primary" onclick="alert('Message sent!')">
-        <span data-i18n="f_send">Send message</span>
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+      <button class="btn-primary" id="submit-btn" onclick="submitForm(event)">
+        <span data-i18n="f_send" id="btn-label">Send message</span>
+        <svg id="btn-icon" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2L15 22l-4-9-9-4 20-7z"/></svg>
+        <svg id="btn-spinner" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="display:none;animation:spin 0.8s linear infinite"><path d="M12 2a10 10 0 0 1 10 10"/></svg>
       </button>
+      <div id="form-feedback" style="display:none;margin-top:0.75rem;padding:0.75rem 1rem;border-radius:6px;font-size:13px;font-weight:500"></div>
     </div>
   </div>
 </div>
@@ -1319,7 +1322,72 @@ function setLang(lang) {
   }, 110);
 }
 
-// Scroll reveal
+// ── Contact form submit ──────────────────────
+const successMsg = { en:'Message sent! I\'ll get back to you soon.', pt:'Mensagem enviada! Responderei em breve.', fr:'Message envoyé ! Je vous répondrai bientôt.', nl:'Bericht verzonden! Ik neem snel contact op.' };
+const errorMsg   = { en:'Error sending. Please try again.', pt:'Erro ao enviar. Tente novamente.', fr:'Erreur d\'envoi. Veuillez réessayer.', nl:'Fout bij verzenden. Probeer opnieuw.' };
+
+async function submitForm(e) {
+  e.preventDefault();
+  const btn      = document.getElementById('submit-btn');
+  const spinner  = document.getElementById('btn-spinner');
+  const icon     = document.getElementById('btn-icon');
+  const feedback = document.getElementById('form-feedback');
+
+  const name    = document.getElementById('inp_name').value.trim();
+  const company = document.getElementById('inp_co').value.trim();
+  const email   = document.querySelector('input[type="email"]').value.trim();
+  const type    = document.querySelector('select').value;
+  const message = document.getElementById('inp_msg').value.trim();
+
+  if (!name || !email || !message) {
+    feedback.style.display = 'block';
+    feedback.style.background = '#FEF2F2';
+    feedback.style.color = '#991B1B';
+    feedback.style.border = '1px solid #FECACA';
+    feedback.textContent = currentLang === 'pt' ? 'Preencha nome, e-mail e mensagem.' : currentLang === 'fr' ? 'Remplissez le nom, l\'e-mail et le message.' : currentLang === 'nl' ? 'Vul naam, e-mail en bericht in.' : 'Please fill name, email and message.';
+    return;
+  }
+
+  btn.disabled = true;
+  spinner.style.display = 'inline-block';
+  icon.style.display = 'none';
+
+  try {
+    const res = await fetch('https://contact.gustavohub.com/api/contact', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, company, email, type, message })
+    });
+    const data = await res.json();
+
+    feedback.style.display = 'block';
+    if (data.ok) {
+      feedback.style.background = '#ECFDF5';
+      feedback.style.color = '#065F46';
+      feedback.style.border = '1px solid #6EE7B7';
+      feedback.textContent = successMsg[currentLang] || successMsg.en;
+      document.getElementById('inp_name').value = '';
+      document.getElementById('inp_co').value = '';
+      document.querySelector('input[type="email"]').value = '';
+      document.querySelector('select').selectedIndex = 0;
+      document.getElementById('inp_msg').value = '';
+    } else {
+      throw new Error(data.error);
+    }
+  } catch {
+    feedback.style.display = 'block';
+    feedback.style.background = '#FEF2F2';
+    feedback.style.color = '#991B1B';
+    feedback.style.border = '1px solid #FECACA';
+    feedback.textContent = errorMsg[currentLang] || errorMsg.en;
+  } finally {
+    btn.disabled = false;
+    spinner.style.display = 'none';
+    icon.style.display = 'inline-block';
+  }
+}
+
+// ── Scroll reveal ──
 const obs = new IntersectionObserver((entries) => {
   entries.forEach((e, i) => {
     if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 70);
