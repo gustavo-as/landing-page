@@ -21,6 +21,30 @@ const T = {
     p3_desc:"Centralized authentication and authorization service with OAuth2, OpenID Connect and JWT token management for multiple applications.",
     p4_title:"Personal Portfolio",
     p4_desc:"Full-stack portfolio with Node.js backend, multi-container Docker setup with Traefik reverse proxy, automated SSL, CI/CD via GitHub Actions and transactional email via Resend.",
+    acc_expand:'+ Case study',
+    acc_positive:'✅ Positives',
+    acc_negative:'❌ Challenges',
+    acc_technical:'🔧 Technical difficulties',
+    acc_learning:'💡 Learnings',
+    p4_pos1:'Complete end-to-end ownership — from design to production',
+    p4_pos2:'CI/CD pipeline fully automated via GitHub Actions',
+    p4_pos3:'Multi-container architecture with clean separation of concerns',
+    p4_pos4:'SSL certificate managed automatically by Traefik + Let\'s Encrypt',
+    p4_pos5:'Transactional email with verified domain via Resend',
+    p4_pos6:'Multi-language support (EN, PT-BR, FR-BE, NL-BE)',
+    p4_neg1:'Traefik routing with multiple Docker networks caused hours of debugging',
+    p4_neg2:'Git conflicts between local VPS edits and GitHub Actions workflow',
+    p4_neg3:'Resend DNS propagation required patience to verify records',
+    p4_neg4:'Separating HTML/CSS/JS required Dockerfile updates not initially committed',
+    p4_tec1:'Traefik v3 picks the wrong network IP when container has multiple networks — fixed with traefik.docker.network label',
+    p4_tec2:'Nginx SPA fallback masked missing JS/CSS files — showed as syntax error in browser console',
+    p4_tec3:'Docker build cache ignored new folders because COPY instructions were missing from Dockerfile',
+    p4_tec4:'GitHub Actions git pull aborted due to local VPS changes — solved with git reset --hard',
+    p4_lea1:'Always add traefik.docker.network when a container is on multiple Docker networks',
+    p4_lea2:'Never edit files directly on VPS without committing — always go through Git',
+    p4_lea3:'Traefik debug logs (--log.level=DEBUG) are essential to diagnose proxy issues',
+    p4_lea4:'Resend is far superior to Gmail SMTP for domain-based transactional email',
+    p4_lea5:'Separating HTML/CSS/JS from the start saves refactoring time later',
     p_add:"Add project",
     s3_label:"// 03 — EXPERIENCE", s3_title:"Professional journey",
     s3_sub:"Building backend solutions across different industries and contexts.",
@@ -64,6 +88,30 @@ const T = {
     p3_desc:"Serviço centralizado de autenticação e autorização com OAuth2, OpenID Connect e gestão de tokens JWT para múltiplas aplicações.",
     p4_title:"Portfólio Pessoal",
     p4_desc:"Portfólio full-stack com backend Node.js, setup multi-container Docker com Traefik como reverse proxy, SSL automático, CI/CD via GitHub Actions e email transaccional via Resend.",
+    acc_expand:'+ Análise do projeto',
+    acc_positive:'✅ Pontos positivos',
+    acc_negative:'❌ Desafios',
+    acc_technical:'🔧 Dificuldades técnicas',
+    acc_learning:'💡 Aprendizagens',
+    p4_pos1:'Controlo total de ponta a ponta — do design à produção',
+    p4_pos2:'Pipeline CI/CD totalmente automatizado via GitHub Actions',
+    p4_pos3:'Arquitectura multi-container com separação clara de responsabilidades',
+    p4_pos4:'Certificado SSL gerido automaticamente pelo Traefik + Let\'s Encrypt',
+    p4_pos5:'Email transaccional com domínio verificado via Resend',
+    p4_pos6:'Suporte multi-idioma (EN, PT-BR, FR-BE, NL-BE)',
+    p4_neg1:'Routing do Traefik com múltiplas redes Docker causou horas de debug',
+    p4_neg2:'Conflitos Git entre edições directas na VPS e o workflow do GitHub Actions',
+    p4_neg3:'Propagação DNS do Resend exigiu paciência para verificar os registos',
+    p4_neg4:'Separar HTML/CSS/JS exigiu actualizações no Dockerfile não commitadas inicialmente',
+    p4_tec1:'Traefik v3 usa o IP da rede errada quando o container tem múltiplas redes — resolvido com o label traefik.docker.network',
+    p4_tec2:'SPA fallback do Nginx mascarava ficheiros JS/CSS em falta — aparecia como erro de sintaxe no browser',
+    p4_tec3:'Cache do Docker build ignorava novas pastas porque faltavam instruções COPY no Dockerfile',
+    p4_tec4:'git pull do GitHub Actions abortava por alterações locais na VPS — resolvido com git reset --hard',
+    p4_lea1:'Sempre adicionar traefik.docker.network quando um container está em múltiplas redes Docker',
+    p4_lea2:'Nunca editar ficheiros directamente na VPS sem commitar — sempre usar Git',
+    p4_lea3:'Logs de debug do Traefik (--log.level=DEBUG) são essenciais para diagnosticar problemas de proxy',
+    p4_lea4:'Resend é muito superior ao SMTP do Gmail para email transaccional com domínio próprio',
+    p4_lea5:'Separar HTML/CSS/JS desde o início poupa tempo de refactoring depois',
     p_add:"Adicionar projeto",
     s3_label:"// 03 — EXPERIÊNCIA", s3_title:"Trajetória profissional",
     s3_sub:"Experiências construindo soluções backend em diferentes contextos e setores.",
@@ -107,6 +155,30 @@ const T = {
     p3_desc:"Service centralisé d'authentification et d'autorisation avec OAuth2, OpenID Connect et gestion des tokens JWT pour plusieurs applications.",
     p4_title:"Portfolio Personnel",
     p4_desc:"Portfolio full-stack avec backend Node.js, setup multi-conteneur Docker avec Traefik comme reverse proxy, SSL automatique, CI/CD via GitHub Actions et email transactionnel via Resend.",
+    acc_expand:'+ Étude de cas',
+    acc_positive:'✅ Points positifs',
+    acc_negative:'❌ Défis',
+    acc_technical:'🔧 Difficultés techniques',
+    acc_learning:'💡 Apprentissages',
+    p4_pos1:'Maîtrise complète de bout en bout — de la conception à la production',
+    p4_pos2:'Pipeline CI/CD entièrement automatisé via GitHub Actions',
+    p4_pos3:'Architecture multi-conteneur avec séparation claire des responsabilités',
+    p4_pos4:'Certificat SSL géré automatiquement par Traefik + Let\'s Encrypt',
+    p4_pos5:'Email transactionnel avec domaine vérifié via Resend',
+    p4_pos6:'Support multilingue (EN, PT-BR, FR-BE, NL-BE)',
+    p4_neg1:'Le routage Traefik avec plusieurs réseaux Docker a causé des heures de débogage',
+    p4_neg2:'Conflits Git entre les modifications directes sur la VPS et le workflow GitHub Actions',
+    p4_neg3:'La propagation DNS Resend a nécessité de la patience pour vérifier les enregistrements',
+    p4_neg4:'Séparer HTML/CSS/JS a nécessité des mises à jour du Dockerfile non committées initialement',
+    p4_tec1:'Traefik v3 utilise le mauvais IP réseau quand le conteneur a plusieurs réseaux — résolu avec le label traefik.docker.network',
+    p4_tec2:'Le fallback SPA Nginx masquait les fichiers JS/CSS manquants — apparaissait comme erreur de syntaxe',
+    p4_tec3:'Le cache Docker ignorait les nouveaux dossiers car les instructions COPY manquaient dans le Dockerfile',
+    p4_tec4:'Le git pull de GitHub Actions était annulé par des modifications locales sur la VPS — résolu avec git reset --hard',
+    p4_lea1:'Toujours ajouter traefik.docker.network quand un conteneur est sur plusieurs réseaux Docker',
+    p4_lea2:'Ne jamais modifier des fichiers directement sur la VPS sans committer — toujours passer par Git',
+    p4_lea3:'Les logs debug Traefik (--log.level=DEBUG) sont essentiels pour diagnostiquer les problèmes de proxy',
+    p4_lea4:'Resend est bien supérieur au SMTP Gmail pour les emails transactionnels avec domaine propre',
+    p4_lea5:'Séparer HTML/CSS/JS dès le départ évite le refactoring plus tard',
     p_add:"Ajouter un projet",
     s3_label:"// 03 — EXPÉRIENCE", s3_title:"Parcours professionnel",
     s3_sub:"Construction de solutions backend dans différents secteurs et contextes.",
@@ -150,6 +222,30 @@ const T = {
     p3_desc:"Gecentraliseerde authenticatie- en autorisatieservice met OAuth2, OpenID Connect en JWT-tokenbeheer voor meerdere applicaties.",
     p4_title:"Persoonlijk Portfolio",
     p4_desc:"Full-stack portfolio met Node.js backend, multi-container Docker setup met Traefik als reverse proxy, automatisch SSL, CI/CD via GitHub Actions en transactionele e-mail via Resend.",
+    acc_expand:'+ Casestudy',
+    acc_positive:'✅ Positieve punten',
+    acc_negative:'❌ Uitdagingen',
+    acc_technical:'🔧 Technische moeilijkheden',
+    acc_learning:'💡 Leerpunten',
+    p4_pos1:'Volledige controle van begin tot eind — van ontwerp tot productie',
+    p4_pos2:'CI/CD pipeline volledig geautomatiseerd via GitHub Actions',
+    p4_pos3:'Multi-container architectuur met duidelijke scheiding van verantwoordelijkheden',
+    p4_pos4:'SSL-certificaat automatisch beheerd door Traefik + Let\'s Encrypt',
+    p4_pos5:'Transactionele e-mail met geverifieerd domein via Resend',
+    p4_pos6:'Meertalige ondersteuning (EN, PT-BR, FR-BE, NL-BE)',
+    p4_neg1:'Traefik-routing met meerdere Docker-netwerken veroorzaakte uren debuggen',
+    p4_neg2:'Git-conflicten tussen directe VPS-bewerkingen en de GitHub Actions-workflow',
+    p4_neg3:'DNS-propagatie van Resend vergde geduld om records te verifiëren',
+    p4_neg4:'HTML/CSS/JS scheiden vereiste Dockerfile-updates die aanvankelijk niet gecommit waren',
+    p4_tec1:'Traefik v3 kiest het verkeerde netwerk-IP als de container meerdere netwerken heeft — opgelost met traefik.docker.network label',
+    p4_tec2:'Nginx SPA-fallback maskeerde ontbrekende JS/CSS-bestanden — zichtbaar als syntaxisfout in browser',
+    p4_tec3:'Docker build-cache negeerde nieuwe mappen omdat COPY-instructies ontbraken in Dockerfile',
+    p4_tec4:'GitHub Actions git pull werd afgebroken door lokale VPS-wijzigingen — opgelost met git reset --hard',
+    p4_lea1:'Altijd traefik.docker.network toevoegen als een container op meerdere Docker-netwerken zit',
+    p4_lea2:'Nooit bestanden direct op de VPS bewerken zonder te committen — altijd via Git',
+    p4_lea3:'Traefik debug-logs (--log.level=DEBUG) zijn essentieel voor het diagnosticeren van proxy-problemen',
+    p4_lea4:'Resend is veel beter dan Gmail SMTP voor transactionele e-mail met eigen domein',
+    p4_lea5:'HTML/CSS/JS vanaf het begin scheiden bespaart later refactoring-tijd',
     p_add:"Project toevoegen",
     s3_label:"// 03 — ERVARING", s3_title:"Professionele loopbaan",
     s3_sub:"Backend-oplossingen bouwen in verschillende sectoren en contexten.",
@@ -276,6 +372,31 @@ async function submitForm(e) {
     btn.disabled = false;
     spinner.style.display = 'none';
     icon.style.display = 'inline-block';
+  }
+}
+
+
+// ── Accordion ──────────────────────────────
+function toggleAccordion(id, trigger) {
+  const acc = document.getElementById(id);
+  const toggle = trigger.querySelector('.acc-toggle');
+  const isOpen = acc.classList.contains('open');
+
+  // Close all open accordions
+  document.querySelectorAll('.accordion.open').forEach(a => {
+    a.classList.remove('open');
+    const t = a.previousElementSibling.querySelector('.acc-toggle');
+    if (t) t.dataset.open = '';
+    a.previousElementSibling.classList.remove('acc-open');
+  });
+
+  if (!isOpen) {
+    acc.classList.add('open');
+    trigger.classList.add('acc-open');
+    if (toggle) toggle.textContent = '− ' + (toggle.textContent.replace(/^[+−] /, ''));
+    acc.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  } else {
+    if (toggle) toggle.textContent = '+ ' + (toggle.textContent.replace(/^[+−] /, ''));
   }
 }
 

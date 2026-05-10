@@ -13,7 +13,7 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#" class="nav-logo">ALVES SIMOES, GUSTAVO</a>
+  <a href="#" class="nav-logo">{ GusTavO }</a>
   <ul class="nav-links">
     <li><a href="#skills" data-i18n="nav_skills">Stack</a></li>
     <li><a href="#projetos" data-i18n="nav_projects">Projects</a></li>
@@ -228,22 +228,70 @@
       <span class="project-link" data-i18n="p_details">View details →</span>
     </div>
     <!-- CARD 4 -->
-    <div class="project-card reveal">
-      <div class="project-header">
-        <span class="project-num">004</span>
-        <span class="project-status status-live" data-i18n="st_live">● Live</span>
+    <div class="project-card-wrap reveal">
+      <div class="project-card acc-trigger" onclick="toggleAccordion('acc-p4', this)">
+        <div class="project-header">
+          <span class="project-num">004</span>
+          <span class="project-status status-live" data-i18n="st_live">● Live</span>
+        </div>
+        <h3 class="project-title" data-i18n="p4_title">Personal Portfolio</h3>
+        <p class="project-desc" data-i18n="p4_desc">Full-stack portfolio with Node.js backend, multi-container Docker setup with Traefik reverse proxy, automated SSL, CI/CD via GitHub Actions and transactional email via Resend.</p>
+        <div class="project-stack">
+          <span class="stack-tag">Node.js</span>
+          <span class="stack-tag">Docker</span>
+          <span class="stack-tag">Nginx</span>
+          <span class="stack-tag">Traefik</span>
+          <span class="stack-tag">Resend</span>
+          <span class="stack-tag">GitHub Actions</span>
+        </div>
+        <div class="project-footer">
+          <a href="https://gustavohub.com" target="_blank" class="project-link" onclick="event.stopPropagation()" data-i18n="p_details">View details →</a>
+          <span class="acc-toggle" data-i18n="acc_expand">+ Case study</span>
+        </div>
       </div>
-      <h3 class="project-title" data-i18n="p4_title">Personal Portfolio</h3>
-      <p class="project-desc" data-i18n="p4_desc">Full-stack portfolio with Node.js backend, multi-container Docker setup with Traefik reverse proxy, automated SSL, CI/CD via GitHub Actions and transactional email via Resend.</p>
-      <div class="project-stack">
-        <span class="stack-tag">Node.js</span>
-        <span class="stack-tag">Docker</span>
-        <span class="stack-tag">Nginx</span>
-        <span class="stack-tag">Traefik</span>
-        <span class="stack-tag">Resend</span>
-        <span class="stack-tag">GitHub Actions</span>
+      <div class="accordion" id="acc-p4">
+        <div class="acc-grid">
+          <div class="acc-section acc-positive">
+            <div class="acc-section-title" data-i18n="acc_positive">✅ Positives</div>
+            <ul class="acc-list">
+              <li data-i18n="p4_pos1">Complete end-to-end ownership — from design to production deployment</li>
+              <li data-i18n="p4_pos2">CI/CD pipeline fully automated via GitHub Actions on every push</li>
+              <li data-i18n="p4_pos3">Multi-container architecture with clean separation of concerns</li>
+              <li data-i18n="p4_pos4">SSL certificate managed automatically by Traefik + Let's Encrypt</li>
+              <li data-i18n="p4_pos5">Transactional email with verified domain via Resend</li>
+              <li data-i18n="p4_pos6">Multi-language support (EN, PT-BR, FR-BE, NL-BE)</li>
+            </ul>
+          </div>
+          <div class="acc-section acc-negative">
+            <div class="acc-section-title" data-i18n="acc_negative">❌ Challenges</div>
+            <ul class="acc-list">
+              <li data-i18n="p4_neg1">Traefik routing with multiple Docker networks caused hours of debugging</li>
+              <li data-i18n="p4_neg2">Git conflicts between local VPS edits and GitHub Actions deploy workflow</li>
+              <li data-i18n="p4_neg3">Resend DNS propagation required patience to verify records</li>
+              <li data-i18n="p4_neg4">Separating HTML/CSS/JS required Dockerfile updates not initially committed</li>
+            </ul>
+          </div>
+          <div class="acc-section acc-technical">
+            <div class="acc-section-title" data-i18n="acc_technical">🔧 Technical difficulties</div>
+            <ul class="acc-list">
+              <li data-i18n="p4_tec1">Traefik v3 picks the wrong network IP when container has multiple networks — fixed with <code>traefik.docker.network</code> label</li>
+              <li data-i18n="p4_tec2">Nginx SPA fallback masked missing JS/CSS files — showed as syntax error in browser console</li>
+              <li data-i18n="p4_tec3">Docker build cache ignored new folders because COPY instructions were missing from Dockerfile</li>
+              <li data-i18n="p4_tec4">GitHub Actions git pull aborted due to local VPS changes — solved with git reset --hard</li>
+            </ul>
+          </div>
+          <div class="acc-section acc-learning">
+            <div class="acc-section-title" data-i18n="acc_learning">💡 Learnings</div>
+            <ul class="acc-list">
+              <li data-i18n="p4_lea1">Always add <code>traefik.docker.network</code> when a container is on multiple Docker networks</li>
+              <li data-i18n="p4_lea2">Never edit files directly on VPS without committing — always go through Git</li>
+              <li data-i18n="p4_lea3">Traefik debug logs (<code>--log.level=DEBUG</code>) are essential to diagnose proxy issues</li>
+              <li data-i18n="p4_lea4">Resend is far superior to Gmail SMTP for domain-based transactional email</li>
+              <li data-i18n="p4_lea5">Separating HTML/CSS/JS from the start saves refactoring time later</li>
+            </ul>
+          </div>
+        </div>
       </div>
-      <a href="https://gustavohub.com" target="_blank" class="project-link" data-i18n="p_details">View details →</a>
     </div>
 
     <!-- EMPTY -->
