@@ -15,6 +15,7 @@
 <nav>
   <a href="#" class="nav-logo">G.A. Simões</a>
   <ul class="nav-links">
+    <li><a href="#about" data-i18n="nav_about">About</a></li>
     <li><a href="#skills" data-i18n="nav_skills">Stack</a></li>
     <li><a href="#projetos" data-i18n="nav_projects">Projects</a></li>
     <li><a href="#experiencia" data-i18n="nav_exp">Experience</a></li>
@@ -85,6 +86,62 @@
     </div>
   </div>
 </section>
+
+
+<!-- ABOUT -->
+<div class="section" id="about">
+  <div class="section-label reveal">
+    <span class="section-num" data-i18n="s0_label">// 00 — ABOUT</span>
+    <div class="section-line"></div>
+  </div>
+  <div class="about-wrapper reveal">
+    <div class="about-text">
+      <p class="about-lead" data-i18n="about_lead">Java backend developer with over 9 years of experience (2009–2019), specialised in the Spring ecosystem and the development of high-complexity systems for government and enterprise sectors.</p>
+      <p data-i18n-html="about_p1">My journey includes contributions to real-impact projects — from electronic tax systems for the Government of the State of Goiás (PAT-e), to an R&D project funded by a non-reimbursable federal grant from FINEP/Tecnova, where I developed SOAP integrations with government services and a Multitenancy SaaS login module. I also have a scientific publication accepted at the <strong>XV Brazilian Congress on Health Informatics (CBIS 2016)</strong>.</p>
+      <p data-i18n="about_p2">Technically, I master Java (8–17), Spring Boot, Spring MVC, Spring Security, REST and SOAP APIs, Hibernate/JPA, Oracle and PostgreSQL, with solid CI/CD practices via GitHub Actions, Docker and testing with JUnit and Mockito.</p>
+      <p data-i18n="about_p3">Currently based in Sint-Niklaas, Belgium, I speak Portuguese natively, English (A2) and advanced French (C1), and I am actively reintegrating into the IT market after a period in civil construction.</p>
+    </div>
+    <div class="about-facts">
+      <div class="about-fact-item">
+        <span class="about-fact-icon">📍</span>
+        <div>
+          <span class="about-fact-label" data-i18n="about_location_label">Location</span>
+          <span class="about-fact-value">Sint-Niklaas, Belgium</span>
+        </div>
+      </div>
+      <div class="about-fact-item">
+        <span class="about-fact-icon">🎓</span>
+        <div>
+          <span class="about-fact-label" data-i18n="about_edu_label">Education</span>
+          <span class="about-fact-value" data-i18n="about_edu_value">Systems Analysis & Development — SENAI (2015–2017)</span>
+        </div>
+      </div>
+      <div class="about-fact-item">
+        <span class="about-fact-icon">🌐</span>
+        <div>
+          <span class="about-fact-label" data-i18n="about_lang_label">Languages</span>
+          <span class="about-fact-value" data-i18n="about_lang_value">Portuguese (native) · French C1 · English A2</span>
+        </div>
+      </div>
+      <div class="about-fact-item">
+        <span class="about-fact-icon">📄</span>
+        <div>
+          <span class="about-fact-label" data-i18n="about_pub_label">Publication</span>
+          <span class="about-fact-value">CBIS 2016 — Kyklos Recycling Cooperative Management System</span>
+        </div>
+      </div>
+      <div class="about-fact-item">
+        <span class="about-fact-icon">🏆</span>
+        <div>
+          <span class="about-fact-label" data-i18n="about_grant_label">R&D Grant</span>
+          <span class="about-fact-value" data-i18n="about_grant_value">FINEP / Tecnova 2013 — Federal non-reimbursable subsidy</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="full-sep"></div>
 
 <!-- SKILLS -->
 <div class="skills-section" id="skills">
@@ -178,18 +235,20 @@
         </span>
       </div>
       <div class="project-visual">
-        <div class="code-line"><span class="code-ann">@RestController</span></div>
-        <div class="code-line"><span class="code-ann">@RequestMapping</span>(<span class="code-str">"/api/v1"</span>)</div>
-        <div class="code-line"><span class="code-kw">public class</span> <span class="code-cls">FinanceCtrl</span> {</div>
+        <div class="code-line"><span class="code-ann">@Controller</span></div>
+        <div class="code-line"><span class="code-ann">@RequestMapping</span>(<span class="code-str">"/pat"</span>)</div>
+        <div class="code-line"><span class="code-kw">public class</span> <span class="code-cls">ProcessoCtrl</span> {</div>
         <div class="code-line">&nbsp;</div>
         <div class="code-line">&nbsp;&nbsp;<span class="code-ann">@Autowired</span></div>
-        <div class="code-line">&nbsp;&nbsp;<span class="code-kw">private</span> <span class="code-cls">FinanceService</span> svc;</div>
+        <div class="code-line">&nbsp;&nbsp;<span class="code-kw">private</span> <span class="code-cls">ProcessoService</span> svc;</div>
         <div class="code-line">&nbsp;</div>
-        <div class="code-line">&nbsp;&nbsp;<span class="code-ann">@GetMapping</span>(<span class="code-str">"/report"</span>)</div>
-        <div class="code-line">&nbsp;&nbsp;<span class="code-kw">public</span> <span class="code-cls">ResponseEntity</span>&lt;<span class="code-cls">Report</span>&gt;</div>
-        <div class="code-line">&nbsp;&nbsp;<span class="code-fn">getReport</span>() {</div>
-        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-kw">return</span> <span class="code-cls">ResponseEntity</span></div>
-        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.<span class="code-fn">ok</span>(svc.<span class="code-fn">generate</span>());</div>
+        <div class="code-line">&nbsp;&nbsp;<span class="code-ann">@GetMapping</span>(<span class="code-str">"/contribuinte"</span>)</div>
+        <div class="code-line">&nbsp;&nbsp;<span class="code-kw">public</span> <span class="code-cls">String</span></div>
+        <div class="code-line">&nbsp;&nbsp;<span class="code-fn">painel</span>(<span class="code-cls">Model</span> model) {</div>
+        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;model.<span class="code-fn">addAttribute</span>(</div>
+        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-str">"processos"</span>,</div>
+        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;svc.<span class="code-fn">findAll</span>());</div>
+        <div class="code-line">&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-kw">return</span> <span class="code-str">"painel"</span>;</div>
         <div class="code-line">&nbsp;&nbsp;}</div>
         <div class="code-line">}</div>
       </div>
@@ -198,16 +257,16 @@
     <div class="project-card reveal">
       <div class="project-header">
         <span class="project-num">002</span>
-        <span class="project-status status-live" data-i18n="st_live">● Live</span>
+        <span class="project-status status-live" data-i18n="p2_status">● FINEP / Tecnova Grant</span>
       </div>
-      <h3 class="project-title" data-i18n="p2_title">Legacy SOAP Integration</h3>
-      <p class="project-desc" data-i18n="p2_desc">Integration middleware between legacy systems (SOAP/XML) and modern REST APIs. Data transformation, error handling and automatic retry.</p>
+      <h3 class="project-title" data-i18n="p2_title">Intelligent Social Network for Tax Management</h3>
+      <p class="project-desc" data-i18n="p2_desc">R&D project awarded a non-reimbursable federal grant (FINEP/Tecnova 2013). Developed SOAP integrations with government services, Multitenancy SaaS login module, technical specifications and new module development. @ Ambient Informática.</p>
       <div class="project-stack">
-        <span class="stack-tag">Java 11</span>
-        <span class="stack-tag">Spring WS</span>
-        <span class="stack-tag">SOAP</span>
-        <span class="stack-tag">JAXB</span>
-        <span class="stack-tag">Oracle DB</span>
+        <span class="stack-tag">Java</span>
+        <span class="stack-tag">SOAP / WSDL</span>
+        <span class="stack-tag">Web Services</span>
+        <span class="stack-tag">Multitenancy SaaS</span>
+        <span class="stack-tag">FINEP Grant</span>
       </div>
       <span class="project-link" data-i18n="p_details">View details →</span>
     </div>
@@ -374,7 +433,7 @@
       </div>
       <div class="exp-highlights reveal">
         <div class="highlight-card">
-          <div class="highlight-num">+5 <span data-i18n="hl_yr">yrs</span></div>
+          <div class="highlight-num">+9 <span data-i18n="hl_yr">yrs</span></div>
           <div class="highlight-label" data-i18n="hl1">Building Java systems in production environments</div>
         </div>
         <div class="highlight-card">
