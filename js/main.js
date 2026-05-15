@@ -470,6 +470,46 @@ async function submitForm(e) {
 }
 
 
+
+// ── Mobile Menu ────────────────────────────
+function closeMenu() {
+  const menu = document.getElementById('mobile-menu');
+  const btn = document.getElementById('hamburger-btn');
+  if (menu) menu.classList.remove('open');
+  if (btn) btn.classList.remove('open');
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  const btn = document.getElementById('hamburger-btn');
+  const menu = document.getElementById('mobile-menu');
+
+  if (btn && menu) {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = menu.classList.contains('open');
+      if (isOpen) {
+        menu.classList.remove('open');
+        btn.classList.remove('open');
+      } else {
+        menu.classList.add('open');
+        btn.classList.add('open');
+      }
+    });
+
+    // Close on nav link click
+    menu.querySelectorAll('.mobile-nav a').forEach(link => {
+      link.addEventListener('click', closeMenu);
+    });
+
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!menu.contains(e.target) && !btn.contains(e.target)) {
+        closeMenu();
+      }
+    });
+  }
+});
+
 // ── Accordion ──────────────────────────────
 function toggleAccordion(id, trigger) {
   const acc = document.getElementById(id);
