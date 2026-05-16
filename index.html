@@ -37,19 +37,21 @@
 
 <!-- MOBILE MENU -->
 <div class="mobile-menu" id="mobile-menu">
-  <nav class="mobile-nav">
-    <a href="#about" data-i18n="nav_about">About</a>
-    <a href="#skills" data-i18n="nav_skills">Stack</a>
-    <a href="#projetos" data-i18n="nav_projects">Projects</a>
-    <a href="#experiencia" data-i18n="nav_exp">Experience</a>
-    <a href="#contato" data-i18n="nav_contact">Contact</a>
-  </nav>
-  <div class="mobile-menu-divider"></div>
-  <div class="lang-switcher mobile-lang" role="group" aria-label="Language">
-    <button class="lang-btn active" data-lang="en" onclick="setLang('en')"><span class="lang-flag">🇬🇧</span>EN</button>
-    <button class="lang-btn" data-lang="pt" onclick="setLang('pt')"><span class="lang-flag">🇧🇷</span>PT</button>
-    <button class="lang-btn" data-lang="fr" onclick="setLang('fr')"><span class="lang-flag">🇧🇪</span>FR</button>
-    <button class="lang-btn" data-lang="nl" onclick="setLang('nl')"><span class="lang-flag">🇧🇪</span>NL</button>
+  <div class="mobile-menu-inner">
+    <div class="lang-switcher mobile-lang" role="group" aria-label="Language">
+      <button class="lang-btn active" data-lang="en" onclick="setLang('en')"><span class="lang-flag">🇬🇧</span>EN</button>
+      <button class="lang-btn" data-lang="pt" onclick="setLang('pt')"><span class="lang-flag">🇧🇷</span>PT</button>
+      <button class="lang-btn" data-lang="fr" onclick="setLang('fr')"><span class="lang-flag">🇧🇪</span>FR</button>
+      <button class="lang-btn" data-lang="nl" onclick="setLang('nl')"><span class="lang-flag">🇧🇪</span>NL</button>
+    </div>
+    <div class="mobile-menu-divider"></div>
+    <nav class="mobile-nav">
+      <a href="#about" data-i18n="nav_about">About</a>
+      <a href="#skills" data-i18n="nav_skills">Stack</a>
+      <a href="#projetos" data-i18n="nav_projects">Projects</a>
+      <a href="#experiencia" data-i18n="nav_exp">Experience</a>
+      <a href="#contato" data-i18n="nav_contact">Contact</a>
+    </nav>
   </div>
 </div>
 
@@ -454,7 +456,7 @@
       </div>
       <div class="exp-highlights reveal">
         <div class="highlight-card">
-          <div class="highlight-num">+9 <span data-i18n="hl_yr">yrs</span></div>
+          <div class="highlight-num">+5 <span data-i18n="hl_yr">yrs</span></div>
           <div class="highlight-label" data-i18n="hl1">Building Java systems in production environments</div>
         </div>
         <div class="highlight-card">

@@ -498,12 +498,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Close on nav link click
     menu.querySelectorAll('.mobile-nav a').forEach(link => {
-      link.addEventListener('click', closeMenu);
+      link.addEventListener('click', () => {
+        closeMenu();
+      });
     });
 
     // Close on outside click
     document.addEventListener('click', (e) => {
-      if (!menu.contains(e.target) && !btn.contains(e.target)) {
+      if (menu.classList.contains('open') &&
+          !menu.contains(e.target) &&
+          !btn.contains(e.target)) {
         closeMenu();
       }
     });
